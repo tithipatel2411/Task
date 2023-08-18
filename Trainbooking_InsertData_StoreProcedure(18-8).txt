@@ -1,0 +1,129 @@
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Tithi PAtel
+-- Create date: 18-8-23
+-- Description:	Insert data train booking
+-- =============================================
+
+alter PROCEDURE UserDetailsInsert
+		@UserId int,
+		@UserName  varchar(50),
+		@EmailId  varchar(15)
+	
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+		insert into UserDetails values(@UserName ,@EmailId ,getdate() ,getdate())
+
+END
+GO
+
+
+------------------------------------------------------------------------------------------------\
+
+alter PROCEDURE BookingInsert
+		@BookingId int,
+		@UserId  int
+
+	
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+		insert into Booking values(@UserId ,getdate() ,getdate() ,getdate())
+
+END
+GO
+------------------------------------------------------------------------------------------------\
+
+alter PROCEDURE PaymentInsert
+		@PaymentId int,
+		@PaymentType  varchar(15)
+	
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+		insert into Payment values(@PaymentType  ,getdate() ,getdate())
+
+END
+GO
+
+------------------------------------------------------------------------------------------------\
+
+alter PROCEDURE TrainListInser
+		@TrainID int,
+		@TrainNumber  varchar(10),
+		@TrainName varchar(50),
+		@NoOfSeat int,
+		@Source varchar(50),
+		@Destination varchar(50)
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+		insert into TrainList values(@TrainNumber ,@TrainName ,@NoOfSeat ,@Source ,@Destination , getdate(),getdate(),getdate(),getdate())
+
+END
+GO
+
+
+------------------------------------------------------------------------------------------------\
+
+alter PROCEDURE StaffInserted
+		@StaffID int,
+		@StaffName  varchar(10),
+		@StaffSalary float,
+		@StaffDepartment varchar(20)
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+		insert into Staff values(@StaffName  ,@StaffSalary ,@StaffDepartment,getdate(),getdate())
+
+END
+GO
+
+------------------------------------------------------------------------------------------------\
+
+Create PROCEDURE WatingUserInsert
+		@WaitingId int,
+		@UserId  int,
+		@TrainListId int
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+		insert into WatingUser values(@UserId  ,@TrainListId,getdate(),getdate())
+
+END
+GO
+
+------------------------------------------------------------------------------------------------\
+
+create PROCEDURE HistoryInsert
+		@HistoryId int,
+		@UserId  int,
+		@PaymentId int,
+		@TrainID int,
+		@StaffId int
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+		insert into History values(@UserId  ,@PaymentId ,@TrainID ,@StaffId,getdate(),getdate())
+
+END
+GO

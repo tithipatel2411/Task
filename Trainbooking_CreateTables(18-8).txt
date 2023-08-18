@@ -1,0 +1,114 @@
+create database TrainTicketBooking
+
+use TrainTicketBooking
+
+create table UserDetails (
+							UserId int identity(1,1),
+							UserName varchar(50),
+							EmailId varchar(15),
+							CreatedAt datetime default getdate(),
+							UpdatedAt datetime default getdate()
+							)
+
+create table Booking (
+							BookingId int identity(1,1),
+							UserId int,
+							BookingDate datetime default getdate(),
+							CreatedAt datetime default getdate(),
+							UpdatedAt datetime default getdate()
+							)
+
+
+create table Payment (
+							PaymentId int identity(1,1),
+							PaymentType varchar(10),
+							CreatedAt datetime default getdate(),
+							UpdatedAt datetime default getdate()
+							)
+
+create table TrainList (
+							TrainID int identity(1,1),
+							TrainNumber varchar(10),
+							TrainName varchar(50),
+							NoOfSeat int,
+							[Source] varchar(50),
+							Destination varchar(50),
+							ArrivalTime date,
+							DeputureTime  date,
+							CreatedAt datetime default getdate(),
+							UpdatedAt datetime default getdate()
+							)
+
+create table Staff (
+							StaffID int identity(1,1),
+							StaffName varchar(10),
+							StaffSalary float,
+							StaffDepartment varchar(20),
+							CreatedAt datetime default getdate(),
+							UpdatedAt datetime default getdate()
+							)
+
+create table WatingUser (
+							WaitingId int  identity(1,1),
+							UserId int,
+							TrainListId int,
+							CreatedAt datetime default getdate(),
+							UpdatedAt datetime default getdate()
+							)
+
+create table History (
+							HistoryId int identity(1,1),
+							UserId int,
+							PaymentId int,
+							TrainID int,
+							StaffId int,
+							StaffDepartment varchar(20),
+							CreatedAt datetime default getdate(),
+							UpdatedAt datetime default getdate()
+							)
+
+alter table history drop column StaffDepartment
+
+select * from UserDetails
+select * from Booking
+select * from Payment
+select * from TrainList
+select * from Staff
+select * from WatingUser
+select * from history
+
+
+
+
+
+-----------------------------------------------
+
+exec UserDetailsInsert 1, 'Shree' ,'shree123@gmail.in'
+
+
+-----------------------------------------------
+
+exec BookingInsert 1,9
+
+
+-------------------------------------------------------------
+
+exec PaymentInsert 1,'case'
+
+-------------------------------------------------------------
+
+exec TrainListInser 1,'101245','garibrath',1000,'Udaipurr','Jammu Tawi'
+
+
+-------------------------------------------------------------
+
+exec StaffInserted 1,'Shreya',22000,'Head'
+
+------------------------------------------------------------------------
+
+exec WatingUserInsert 1,6,1
+
+
+-------------------------------------------------------------------------------
+
+exec HistoryInsert 1,11,2,1,3
