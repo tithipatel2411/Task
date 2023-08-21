@@ -1,0 +1,27 @@
+
+CREATE TRIGGER AddWallet
+ON booking
+AFTER insert 
+AS
+BEGIN
+	print  'triiger called';
+	update UserDetails set Wallet -= (select sum(ammount) from inserted)
+					where UserDetails.UserId in (select inserted.UserId from inserted)
+					print 'trigger executed'
+END;
+
+insert into Booking values (8,getdate(),getdate(),getdate(),2000)
+
+
+-------------------------------------------------------------------------
+
+CREATE trigger BookingHistory
+ON Booking
+AFTER delete
+AS
+BEGIN
+	Declare
+	@Id int;
+	Select @Id=bookingid from deleted	
+	insert into DeleteHistory values('booking id is '+cast(@Id as nvarchar(5)) +  ' deleted on'+CAST(GETDATE() as nvarchar(30)) )
+END;
